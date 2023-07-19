@@ -1,7 +1,6 @@
 # Go & WebAssembly Demonstrations
 
-![snaketerm.png](snaketerm.png) 
-![snakeweb.png](snakeweb.png)
+<img src="snaketerm.png" width="300" /> <img src="snakeweb.png" width="300" />
 
 ## Demo 1
 ### Hello World in the Frontend
