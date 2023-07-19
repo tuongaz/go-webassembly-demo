@@ -1,0 +1,11 @@
+build: clean
+    cd add && cargo build --target wasm32-wasi
+
+test-wasmtime:
+    wasmtime --invoke=add add/target/wasm32-wasi/debug/add.wasm 1 2
+
+test: build
+    go run consumer.go
+
+clean:
+    rm -f add/target/wasm32-wasi/debug/add.wasm

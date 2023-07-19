@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="wasm_exec.js"></script>
+    <script type="application/javascript">
+        const go = new Go(); // Defined in wasm_exec.js
+
+        WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject)
+            .then(function (obj) {
+                go.run(obj.instance);
+            })
+
+        function callHello() {
+            const result = hello('World')
+            alert(result)
+        }
+    </script>
+</head>
+<body>
+<div id="output"></div>
+<button style="font-size: 30px;" onclick="callHello()">Hello</button>
+<button id="demo2" style="font-size: 30px;" onclick="changeToRed()">Change me to red</button>
+</body>
+</html>

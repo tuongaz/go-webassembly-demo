@@ -1,0 +1,19 @@
+build:
+    @echo "Building wasm using Go"
+    GOOS=js GOARCH=wasm go build -o ./web/game.wasm ./cmd/wasm
+    cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" ./web/
+
+build-food-provider:
+    cd foodprovider && cargo build --target wasm32-wasi
+
+play-web: build
+    @echo "Starting wasm"
+    open http://localhost:8083 && python3 -m http.server 8083 --directory ./web/
+
+play-terminal:
+    go run cmd/term/main.go
+
+clean:
+    rm -f foodprovider/target/wasm32-wasi/debug/foodprovider.wasm
+    rm -f web/game.wasm
+    rm -f web/wasm_exec.js

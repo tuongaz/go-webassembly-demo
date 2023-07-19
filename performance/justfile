@@ -1,0 +1,13 @@
+build-wasm-go:
+    @echo "Building wasm"
+    @GOOS=js GOARCH=wasm go build -o ./main.wasm .
+    cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" ./
+
+build-wasm-tinygo:
+    @echo "Building wasm"
+    @tinygo build -o ./main.wasm -target wasm ./
+    cp "$(tinygo env TINYGOROOT)/targets/wasm_exec.js" ./
+
+start: build-wasm-tinygo
+    @echo "Starting wasm"
+    open http://localhost:8082 && python3 -m http.server 8082 --directory ./

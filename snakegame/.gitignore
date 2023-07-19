@@ -1,0 +1,4 @@
+.idea
+vendor
+web/*.wasm
+web/wasm_exec.js
